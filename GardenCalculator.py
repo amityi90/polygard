@@ -27,7 +27,9 @@ class GardenCalculator:
     
     def find_best_garden(self):
         def get_attribute(obj):
-            return obj.name       
+            return obj.name    
+        highest_garden_value = -10000000
+        highest_garden_order = ""
         orders_and_values = [] 
         resized_plant_list = self.resize_plants_list()
         permuted_plants_list = list(permutations(resized_plant_list))
@@ -38,7 +40,10 @@ class GardenCalculator:
             new_garden = Garden(3, 2, [], new_garden_matrix)
             distance_value = new_garden.init_and_return_distances_value()
             # new_garden.print_plant_matrix_names()
-            print(f"\n ------ garden value: {distance_value} ")
+            if distance_value > highest_garden_value:
+                highest_garden_value = distance_value
+                highest_garden_order = new_garden.print_plant_matrix_names()
+            print(f"\n ------ garden value: {distance_value} \n----highest value: {highest_garden_value}  \n-{highest_garden_order}-\n\n")
             orders_and_values.append({"order": new_garden_matrix, "garden": new_garden, "distance_value": distance_value})
         best_garden = max(orders_and_values, key=lambda x: x["distance_value"])
         print(best_garden["garden"].print_plant_matrix_names(), f"\n\nvalue: {best_garden['distance_value']} \n {np.vectorize(get_attribute)(best_garden['order'])}")

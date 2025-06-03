@@ -21,5 +21,5 @@ for plant in response.data:
     all_plants.append(new_plant)
     print(new_plant)
 
-gc = GardenCalculator(3, 2, all_plants[16:32])
+gc = GardenCalculator(3, 3, all_plants[16:32])
 gc.find_best_garden()

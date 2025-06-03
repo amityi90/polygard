@@ -20,16 +20,18 @@ class Garden:
                 for x_companion_plant in range(self.width):
                     for y_companion_plant in range(self.heigt):
                         companion_plant = self.garden_matrix[y_companion_plant][x_companion_plant]
-                        if companion_plant.name in current_plant.good_companion_plants:
+                        print("DEBUG current_plant:", current_plant)
+                        print("DEBUG type:", type(current_plant))
+                        if companion_plant.name in current_plant.companion_plants:
                             distance = math.sqrt((x_companion_plant - x_current_plant) ** 2 + (y_companion_plant - y_current_plant) ** 2)
                             if distance != 0:
                                 gcp_sum_of_distances += 1 / abs(distance)
-                        elif companion_plant.name in current_plant.bad_companion_plants:
+                        elif companion_plant.name in current_plant.antagonistic_plants:
                             distance = math.sqrt((x_companion_plant - x_current_plant) ** 2 + (y_companion_plant - y_current_plant) ** 2)
                             if distance != 0:
                                 bcp_sum_of_distances += 1 / -abs(distance)
-                current_plant.set_gcp_distances_sum(gcp_sum_of_distances)
-                current_plant.set_bcp_distances_sum(bcp_sum_of_distances)
+                current_plant.set_companion_distances_sum(gcp_sum_of_distances)
+                current_plant.set_antagonistic_distances_sum(bcp_sum_of_distances)
                 current_plant.set_general_sum(gcp_sum_of_distances + bcp_sum_of_distances)
 
     def print_plant_matrix_names(self):
